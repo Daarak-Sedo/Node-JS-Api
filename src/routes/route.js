@@ -98,5 +98,22 @@ router.get('/get-/films/:indexNumber', function (req, res) { //student detail ap
     }
 })
 
+//////////////  multipal path params ////////////////////////////////////////
+router.get('/name/:a/:b/:c/:d',function(req,res){
+    //  api me dynamic varibal (:) path parametar, req ke parametar ke obj , ke rup me store hota h
+
+   let a=req.params.a
+   let b=req.params.b
+   let c=req.params.c
+   let d=req.params.d
+   let e=req.params.e
+
+   // console.log(a,b,c,d)
+
+   res.send([a,b,c,d])
+   
+   
+})
+
 
 module.exports = router;
