@@ -70,4 +70,113 @@ router.post("/test-post-4", function(req, res) {
     res.send(  { msg: arr , status: true }  )
 })
 
+
+////////////////////////////// Assignment /////////////////////////////////////////////////////
+
+        // PROBLEM - 1 
+
+// Write a POST /players api that saves a player’s details and doesn’t allow saving the data of a player with a name that already exists in the data
+
+let players =
+  [
+    {
+      "name": "manish",
+      "dob": "1/1/1995",
+      "gender": "male",
+      "city": "jalandhar",
+      "sports": [
+        "swimming"
+      ]
+    },
+    {
+      "name": "gopal",
+      "dob": "1/09/1995",
+      "gender": "male",
+      "city": "delhi",
+      "sports": [
+        "soccer"
+      ],
+    },
+    {
+      "name": "lokesh",
+      "dob": "1/1/1990",
+      "gender": "male",
+      "city": "mumbai",
+      "sports": [
+        "soccer"
+      ],
+    },
+  ]
+
+  router.post('/players', function (req, res) {
+    //LOGIC WILL COME HERE
+    let newplayer = req.body
+
+   let newPlayersName = newplayer.name
+  
+    for (i = 0; i < players.length; i++) {
+      if (players[i].name == newPlayersName) {
+        return res.send("Sorry, This name is already exist!")
+      }
+     }
+    players.push(newplayer)
+    
+   res.send(players)
+  
+  })
+
+//////////////////////// PROBLEM-- 2  ///////////////////////////////////////////////////////
+
+// you will be given an array of persons { i.e an array of objects }...each person will have a {name:String,age:Number, votingStatus:true/false} .  take input in quary param as votingAge . and for all the people above that age, change votingAge as true also return an array consisting of only the person that can vote 
+
+// write a post api to the above-
+// take this as sample for array of persons:
+
+let person=[
+  {
+    name:"pk",
+    age:10,
+    votingStatus:false
+  },
+  {
+    name:"raju",
+    age:20,
+    votingStatus:false
+  },
+  {
+    name:"sonam",
+    age:70,
+    votingStatus:false
+  },
+  {
+    name:"heera",
+    age:5,
+    votingStatus:false
+  },
+  {
+    name:"lalu",
+    age:40,
+    votingStatus:false
+  }
+]
+
+router.post('/voters1',function(req,res){
+ // let result0=req.query.age
+ let result=[];
+ for(let i=0;i,person.length;i++){
+  let person=person[i];
+  if(person.age>=18 && req.query.age>18){
+    person.votingStatus=true
+    result.push(person)
+  }
+ }
+ if(req.query.age>=18){
+  res.send(result)
+ }else{
+  res.send("not eligibal for voting")
+ }
+})
+
+
+
 module.exports = router;
