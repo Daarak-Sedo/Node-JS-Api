@@ -160,6 +160,8 @@ let person=[
   }
 ]
 
+   // MATHOD -  1  ============================================================================================
+
 router.post('/voters1',function(req,res){
  // let result0=req.query.age
  let result=[];
@@ -177,6 +179,23 @@ router.post('/voters1',function(req,res){
  }
 })
 
+  // MATHOD - 2  ===================================================================================================
+
+router.post('/voting', function(req, res){
+    let age=req.query.age
+    
+    let elegibalPerson=[]
+    for (let i=0; i<person.length; i++){
+        if(person[i].age>=age){
+            person[i].votingStatus=true
+            elegibalPerson.push(person[i])
+        }
+    }if(elegibalPerson.length==0){
+        return res.send('No data to show.')
+    }else{
+    return res.send(elegibalPerson)
+    }
+})
 
 
 module.exports = router;
